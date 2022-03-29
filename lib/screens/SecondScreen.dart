@@ -31,40 +31,52 @@ class SecondScreen extends StatelessWidget {
             return ListView(
               children: (snapshot.data as List<Photo>)
                   .map(
-                    (photo) => ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 3, vertical: 2),
-                      title: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.homeScreen,
-                            arguments: photo.toString(),
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 5),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          width: 270,
-                          height: 110,
-                          child: Center(
-                            child: Text(
-                              photo.toString(),
-                              style: const TextStyle(
-                                fontSize: 17,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    (photo) => MyListTile(photo: photo),
                   )
                   .toList(),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class MyListTile extends StatelessWidget {
+  final dynamic photo;
+
+  const MyListTile({
+    Key? key,
+    this.photo,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+      title: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(
+            AppRoutes.homeScreen,
+            arguments: photo.toString(),
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black, width: 2),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          width: 270,
+          height: 110,
+          child: Center(
+            child: Text(
+              photo.toString(),
+              style: const TextStyle(
+                fontSize: 17,
+              ),
+            ),
+          ),
         ),
       ),
     );
